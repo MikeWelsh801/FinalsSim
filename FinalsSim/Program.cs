@@ -15,8 +15,8 @@ Console.WriteLine("\t\tCalculating Series Odds... ");
 Console.WriteLine();
 Console.WriteLine();
 // Predicted probability of team with homecourt advantage winning a home game. 
-// (derived from neural net and rounded
-// S
+// (derived from neural net and rounded)
+// 
 // 2022 finals probabilities: Home - 54%, Away - 52%
 if (args.Length != 2)
     throw new ArgumentException("Incorrect number of arguments.");
