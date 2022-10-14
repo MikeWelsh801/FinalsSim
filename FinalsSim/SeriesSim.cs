@@ -16,11 +16,6 @@ namespace FinalsSim
      
         public double AwayProb { get; private set; }
         public double HomeProb { get; private set; }
-
-        public int HomeWins { get; private set; }
-        public int AwayWins { get; private set; }
-
-
         
 
         /// <summary>
@@ -32,8 +27,6 @@ namespace FinalsSim
         {
             AwayProb = awayProb;
             HomeProb = homeProb;
-            HomeWins = 0;
-            AwayWins = 0;
         }
 
         /// <summary>
@@ -46,27 +39,27 @@ namespace FinalsSim
         public int Run()
         {
             // Reset series wins
-            this.HomeWins = 0;
-            this.AwayWins = 0;
+            int homeWins = 0;
+            int awayWins = 0;
 
             // Run the first four games
-            gameSim('h');
-            gameSim('h');
-            gameSim('a');
-            gameSim('a');
+            gameSim('h', ref homeWins, ref awayWins);
+            gameSim('h', ref homeWins, ref awayWins);
+            gameSim('a', ref homeWins, ref awayWins);
+            gameSim('a', ref homeWins, ref awayWins);
 
             // Run Next three games if necessary
-            if (HomeWins != 4 && AwayWins != 4)
-                gameSim('h');
-            if (HomeWins != 4 && AwayWins != 4)
-                gameSim('a');
-            if (HomeWins != 4 && AwayWins != 4)
-                gameSim('h');
+            if (homeWins != 4 && awayWins != 4)
+                gameSim('h', ref homeWins, ref awayWins);
+            if (homeWins != 4 && awayWins != 4)
+                gameSim('a', ref homeWins, ref awayWins);
+            if (homeWins != 4 && awayWins != 4)
+                gameSim('h', ref homeWins, ref awayWins);
 
-            if (HomeWins > AwayWins)
-                return HomeWins + AwayWins - 4;
+            if (homeWins > awayWins)
+                return homeWins + awayWins - 4;
             
-            return HomeWins + AwayWins;
+            return homeWins + awayWins;
         }
 
         /// <summary>
@@ -74,24 +67,22 @@ namespace FinalsSim
         /// User must specify type of game('h' or 'a' for home or away).
         /// </summary>
         /// <param name="type"></param>
-        private void gameSim(char type)
+        private void gameSim(char type, ref int homeWins, ref int awayWins)
         {
-            
-            if(type == 'h')
-            {
-                Random rng = new Random();
-                double predict = rng.NextDouble();
+            Random rng = new();
+            double predict = rng.NextDouble();
+
+            if (type == 'h')
+            { 
                 if (predict <= HomeProb)
-                    this.HomeWins++;
-                else this.AwayWins++;
+                    homeWins++;
+                else awayWins++;
             }
             if(type == 'a')
             {
-                Random rng = new Random();
-                double predict = rng.NextDouble();
                 if (predict <= AwayProb)
-                    this.AwayWins++;
-                else this.HomeWins++;
+                    awayWins++;
+                else homeWins++;
             }
 
         }

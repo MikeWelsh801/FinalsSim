@@ -1,5 +1,4 @@
 ﻿
-
 // Result list indices (sample space): H4, H5, H6, H7, A4, A5, A6, A7
 // Hometeam wins are first four indices and how many games the series ran. Example: 
 // index zero is how many series simulations resulted in a sweep for the team with
@@ -11,7 +10,9 @@ List<int> result = new() { 0, 0, 0, 0, 0, 0, 0, 0 };
 string HomeTeam = "Golden State";
 string AwayTeam = "Boston";
 
-Console.WriteLine("\t\tCalculating Series Odds... ");
+string intro = "Calculating Series Odds...";
+Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (intro.Length / 2)) + "}", intro));
+//Console.WriteLine("\tCalculating Series Odds... ");
 Console.WriteLine();
 Console.WriteLine();
 
@@ -57,7 +58,7 @@ for (int i = 0; i < result.Count; i++)
     string winner = (i < 4) ? HomeTeam : AwayTeam;
     int games = (i < 4) ? i + 4 : i;
     check += prob;
-    Console.WriteLine($"There is a {prob * 100:F1} percent chance of {winner} winning the series in {games} games.");
+    Console.WriteLine($"\tThere is a {prob * 100:F1} percent chance of {winner} winning the series in {games} games.");
     Console.WriteLine();
 
     if(i < 4)
@@ -67,11 +68,14 @@ for (int i = 0; i < result.Count; i++)
 
 homeTeamProb /= runs;
 awayTeamProb /= runs;
-
-Console.WriteLine($"{HomeTeam} has a {homeTeamProb * 100:F1} percent chance of winning the series.");
 Console.WriteLine();
-Console.WriteLine($"{AwayTeam} has a {awayTeamProb * 100:F1} percent chance of winning the series.");
+string outro1 = "************* Final Odds ******************";
+string outro2 = "*******************************************";
+Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (outro1.Length / 2)) + "}", outro1));
+Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (outro2.Length / 2)) + "}", outro2));
 
-
-
-
+Console.WriteLine();
+Console.WriteLine($"\t{HomeTeam} has a {homeTeamProb * 100:F1} percent chance of winning the series.");
+Console.WriteLine();
+Console.WriteLine($"\t{AwayTeam} has a {awayTeamProb * 100:F1} percent chance of winning the series.");
+Console.Read();
