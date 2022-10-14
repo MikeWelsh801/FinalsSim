@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FinalsSim": {
+      "commandName": "Project",
+      "commandLineArgs": "0.54 0.52"
+    }
+  }
+}

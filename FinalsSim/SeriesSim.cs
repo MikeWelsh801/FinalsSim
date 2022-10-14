@@ -1,25 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace FinalsSim
 {
-    
+    /// <summary>
+    /// This class runs a 7-gane nba series simulation.
+    /// </summary>
     internal class SeriesSim
     {
      
-        public double AwayProb { get; set; }
-        public double HomeProb { get; set; }
+        public double AwayProb { get; private set; }
+        public double HomeProb { get; private set; }
 
-        public int HomeWins { get; set; }
-        public int AwayWins { get; set; }
+        public int HomeWins { get; private set; }
+        public int AwayWins { get; private set; }
 
 
         
 
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="awayProb"></param>
+        /// <param name="homeProb"></param>
         public SeriesSim(double awayProb, double homeProb)
         {
             AwayProb = awayProb;
@@ -28,12 +36,13 @@ namespace FinalsSim
             AwayWins = 0;
         }
 
-        /*
-         * Runs a 7 game series 
-         * 
-         * Returns the index of the result in an 8 element array containing all possible
-         * outcomes.
-         */
+        /// <summary>
+        /// Runs a 7 game series  
+        /// 
+        /// Returns the index of the result in an 8 element array containing all possible
+        /// outcomes.
+        /// </summary>
+        /// <returns></returns>
         public int Run()
         {
             // Reset series wins
@@ -60,12 +69,11 @@ namespace FinalsSim
             return HomeWins + AwayWins;
         }
 
-        /*
-         * Predicts the result of a single game using the field probabilities. 
-         * User must specify type of game ('h' or 'a' for home or away).
-         * 
-         * 
-         */
+        /// <summary>
+        /// Predicts the result of a single game using the field probabilities. 
+        /// User must specify type of game('h' or 'a' for home or away).
+        /// </summary>
+        /// <param name="type"></param>
         private void gameSim(char type)
         {
             
