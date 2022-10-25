@@ -69,8 +69,8 @@ for (int i = 0; i < result.Count; i++)
 homeTeamProb /= runs;
 awayTeamProb /= runs;
 Console.WriteLine();
-string outro1 = "************* Final Odds ******************";
-string outro2 = "*******************************************";
+string outro1 = "****************** Final Odds ******************";
+string outro2 = "************************************************";
 Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (outro1.Length / 2)) + "}", outro1));
 Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (outro2.Length / 2)) + "}", outro2));
 
