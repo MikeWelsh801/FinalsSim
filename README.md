@@ -18,6 +18,9 @@ end of the season to predict who won. This is a problem if a team underwent chan
 data from the date that games were played, this likely would have resulted in a better model. Also, I'm not convinced that a Neural Network is the best way to predict highly volitile outcomes
 like NBA games due to its tendency toward overfitting. I might try to rework this as a logistic regression model in the future.
 
+I made this project as a learning experience. I had a lot of fun discovering how neural networks work and how to train and build a statistical prediction model. As I was mainly using this project
+as for my own education, if anyone finds this code useful, feel free to use part or all of this project for whatever you'd like. If you feel inclined, you can help me out by citing this repository
+in your project. Thank you to Made With ML for making their tutorials and material available learners like myself. You can find a link to their website below.
 
 @article{madewithml,
     author       = {Goku Mohandas},
