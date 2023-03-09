@@ -14,7 +14,6 @@ from torch.optim import Adam
 import torch.nn.functional as F
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
-
 # Set seed, so we get same data every time
 SEED = 1234
 LEARNING_RATE = 1e-2
@@ -22,7 +21,7 @@ np.random.seed(SEED)
 random.seed(SEED)
 
 # call loading function and plot
-df, X, y = Load.load_from_file("C:\\Users\\mikew\\OneDrive\\Desktop\\NN Stuff\\NBA_Training_Data.csv")
+df, X, y = Load.load_from_file("./NN Stuff/NBA_Training_Data.csv")
 # Load.plot(X, y, "Games by Fg%")
 
 # split up the data into training, test, validation sets
@@ -152,7 +151,7 @@ print(json.dumps(performance, indent=2))
 
 # Inputs for inference
 predDF, X_infer, y_null = Load.load_from_file(
-    "C:\\Users\\mikew\\OneDrive\\Desktop\\NN Stuff\\2022_NBA_FINALS_DATA.csv")
+    "./NN Stuff/BOSTON_FINALS.csv")
 
 # Standardize
 X_infer, throw, throw2 = pr.standardize(X_infer, X_infer, X_infer)
@@ -169,14 +168,14 @@ print(f"The probability that {label} will win at home is {y_infer.detach().numpy
 
 # Inputs for inference
 predDF2, X_inferB, y_null2 = Load.load_from_file(
-    "C:\\Users\\mikew\\OneDrive\\Desktop\\NN Stuff\\BOSTON_FINALS.csv")
+    "./NN Stuff/2022_NBA_FINALS_DATA.csv")
 
 # Standardize
 X_inferB, throw3, throw4 = pr.standardize(X_inferB, X_inferB, X_inferB)
 
 
 y_inferB = F.softmax(model(torch.Tensor(X_inferB)), dim=1)
-prob2, _class = y_infer.max(dim=1)
+prob2, _class2 = y_inferB.max(dim=1)
 label_encoder = LabelEncoder()
 label_encoder.fit(y_train)
 label2 = label_encoder.inverse_transform(_class.detach().numpy())[0]
