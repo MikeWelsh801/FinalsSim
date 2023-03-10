@@ -40,6 +40,10 @@ y_train, y_val, y_test, counts, class_weights, classes = pr.encode_labels(y_trai
 print(f"counts: {counts}\nweights: {class_weights}")
 print()
 
+# capture mean and std for normalizing samples
+means = np.mean(X_train, axis=0)
+stds = np.std(X_train, axis=0)
+
 # Standardize all input data and check that mean ~ 0 and std ~ 1
 X_train, X_val, X_test = pr.standardize(X_train, X_val, X_test)
 print(f"X_test[0]: mean: {np.mean(X_test[:, 0], axis=0):.1f}, std: {np.std(X_test[:, 0], axis=0):.1f}")
@@ -154,7 +158,8 @@ predDF, X_infer, y_null = Load.load_from_file(
     "./NN Stuff/BOSTON_FINALS.csv")
 
 # Standardize
-X_infer, throw, throw2 = pr.standardize(X_infer, X_infer, X_infer)
+X_infer -= means
+X_infer /= stds
 
 
 y_infer = F.softmax(model(torch.Tensor(X_infer)), dim=1)
@@ -164,22 +169,22 @@ label_encoder = LabelEncoder()
 label_encoder.fit(y_train)
 label = label_encoder.inverse_transform(_class.detach().numpy())[0]
 
-print(f"The probability that {label} will win at home is {y_infer.detach().numpy()[0][1]*100.0}%")
+print(f"The probability that Boston will win at home is {y_infer.detach().numpy()[0][1]*100.0}%")
 
 # Inputs for inference
 predDF2, X_inferB, y_null2 = Load.load_from_file(
     "./NN Stuff/2022_NBA_FINALS_DATA.csv")
 
 # Standardize
-X_inferB, throw3, throw4 = pr.standardize(X_inferB, X_inferB, X_inferB)
-
+X_inferB -= means
+X_inferB /= stds
 
 y_inferB = F.softmax(model(torch.Tensor(X_inferB)), dim=1)
 prob2, _class2 = y_inferB.max(dim=1)
 label_encoder = LabelEncoder()
 label_encoder.fit(y_train)
-label2 = label_encoder.inverse_transform(_class.detach().numpy())[0]
+label2 = label_encoder.inverse_transform(_class2.detach().numpy())[0]
 print(y_inferB)
 
 
-print(f"The probability that {label2} will win at home is {y_inferB.detach().numpy()[0][1]*100.0}%")
+print(f"The probability that Golden Sate will win at home is {y_inferB.detach().numpy()[0][1]*100.0}%")
