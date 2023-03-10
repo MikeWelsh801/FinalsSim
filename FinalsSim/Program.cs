@@ -76,4 +76,5 @@ Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (outro2.Len
 
 Console.WriteLine();
 Console.WriteLine($"\t{HomeTeam} has a {homeTeamProb * 100:F1} percent chance of winning the series.");
+Console.WriteLine($"\t{AwayTeam} has a {awayTeamProb * 100:F1} percent chance of winning the series.");
 Console.WriteLine();
