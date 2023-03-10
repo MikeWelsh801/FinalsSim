@@ -1,0 +1,3 @@
+echo Training network and getting probabilities...
+
+python NeuralNet.py > train.txt

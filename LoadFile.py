@@ -23,8 +23,8 @@ def load_from_file(file):
             "HORB Opp","HDRB Opp","HTRB Opp","HAST Opp","HSTL Opp","HBLK Opp",
             "HTOV Opp","HPF Opp","HPTS Opp"]].values
     y = df["Home/Away Wins"].values
-    print("X: ", np.shape(X))
-    print("y: ", np.shape(y))
+    # print("X: ", np.shape(X))
+    # print("y: ", np.shape(y))
     return df, X, y
 
 

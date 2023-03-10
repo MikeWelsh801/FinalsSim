@@ -9,14 +9,14 @@ def encode_labels(y_train, y_val, y_test):
     # fit to the training data
     label_encoder = label_encoder.fit(y_train)
     classes = list(label_encoder.classes_)
-    print(f"Classes: {classes}")
+    # print(f"Classes: {classes}")
 
     # convert labels to tokens
-    print(f"y_train[0]: {y_train[0]}")
+    # print(f"y_train[0]: {y_train[0]}")
     _y_train = label_encoder.transform(y_train)
     _y_val = label_encoder.transform(y_val)
     _y_test = label_encoder.transform(y_test)
-    print(f"y_train[0] as token: {_y_train[0]}")
+    # print(f"y_train[0] as token: {_y_train[0]}")
 
     # get class weights
     counts = np.bincount(_y_train)

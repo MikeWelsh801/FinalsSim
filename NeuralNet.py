@@ -13,6 +13,7 @@ import TorchNNUtil as Util
 from torch.optim import Adam
 import torch.nn.functional as F
 from sklearn.preprocessing import LabelEncoder, StandardScaler
+import sys
 
 # Set seed, so we get same data every time
 SEED = 1234
@@ -27,18 +28,18 @@ df, X, y = Load.load_from_file("./NN Stuff/NBA_Training_Data.csv")
 # split up the data into training, test, validation sets
 TRAIN_SIZE = 0.7
 X_train, X_val, X_test, y_train, y_val, y_test = train_val_test_split(X, y, TRAIN_SIZE)
-print(f"X_train: {X_train.shape}, y_train: {y_train.shape}")
-print(f"X_val: {X_val.shape}, y_train: {y_val.shape}")
-print(f"X_test: {X_test.shape}, y_train: {y_test.shape}")
+# print(f"X_train: {X_train.shape}, y_train: {y_train.shape}")
+# print(f"X_val: {X_val.shape}, y_train: {y_val.shape}")
+# print(f"X_test: {X_test.shape}, y_train: {y_test.shape}")
 # print(f"Sample point: {X_train[0]} -> {y_train[0]}")
-print()
+# print()
 
 # -----Preprocessing--------------
 
 # Convert output labels to tokens
 y_train, y_val, y_test, counts, class_weights, classes = pr.encode_labels(y_train, y_val, y_test)
-print(f"counts: {counts}\nweights: {class_weights}")
-print()
+# print(f"counts: {counts}\nweights: {class_weights}")
+# print()
 
 # capture mean and std for normalizing samples
 means = np.mean(X_train, axis=0)
@@ -46,8 +47,8 @@ stds = np.std(X_train, axis=0)
 
 # Standardize all input data and check that mean ~ 0 and std ~ 1
 X_train, X_val, X_test = pr.standardize(X_train, X_val, X_test)
-print(f"X_test[0]: mean: {np.mean(X_test[:, 0], axis=0):.1f}, std: {np.std(X_test[:, 0], axis=0):.1f}")
-print(f"X_test[1]: mean: {np.mean(X_test[:, 1], axis=0):.1f}, std: {np.std(X_test[:, 1], axis=0):.1f}")
+# print(f"X_test[0]: mean: {np.mean(X_test[:, 0], axis=0):.1f}, std: {np.std(X_test[:, 0], axis=0):.1f}")
+# print(f"X_test[1]: mean: {np.mean(X_test[:, 1], axis=0):.1f}, std: {np.std(X_test[:, 1], axis=0):.1f}")
 
 # Set seed for reproducibility
 torch.manual_seed(SEED)
@@ -57,9 +58,9 @@ INPUT_DIM = X_train.shape[1]  # 84-dimensional
 HIDDEN_DIM = 100
 NUM_CLASSES = len(classes)  # 2 classes
 
-print()
-print("**** Training Network ****")
-print()
+# print()
+# print("**** Training Network ****")
+# print()
 
 # Convert tensors to NumPy arrays
 # X_train = X_train.numpy()
@@ -124,7 +125,7 @@ DROPOUT_P = 0.15
 
 # Initialize model
 model = Util.MLP(input_dim=INPUT_DIM, hidden_dim=HIDDEN_DIM, dropout_p=DROPOUT_P, num_classes=NUM_CLASSES)
-print(model.named_parameters)
+# print(model.named_parameters)
 
 # Define loss
 loss_fn = Util.loss_function(class_weights=class_weights)
@@ -151,7 +152,7 @@ y_pred = y_prob.max(dim=1)[1]
 
 # performance
 performance = Eval.get_metrics(y_true=y_test, y_pred=y_pred, classes=classes)
-print(json.dumps(performance, indent=2))
+# print(json.dumps(performance, indent=2))
 
 # Inputs for inference
 predDF, X_infer, y_null = Load.load_from_file(
@@ -163,13 +164,13 @@ X_infer /= stds
 
 
 y_infer = F.softmax(model(torch.Tensor(X_infer)), dim=1)
-print(y_infer)
+# print(y_infer)
 prob, _class = y_infer.max(dim=1)
 label_encoder = LabelEncoder()
 label_encoder.fit(y_train)
 label = label_encoder.inverse_transform(_class.detach().numpy())[0]
 
-print(f"The probability that Boston will win at home is {y_infer.detach().numpy()[0][1]*100.0}%")
+# print(f"The probability that Boston will win at home is {y_infer.detach().numpy()[0][1]*100.0}%")
 
 # Inputs for inference
 predDF2, X_inferB, y_null2 = Load.load_from_file(
@@ -184,7 +185,9 @@ prob2, _class2 = y_inferB.max(dim=1)
 label_encoder = LabelEncoder()
 label_encoder.fit(y_train)
 label2 = label_encoder.inverse_transform(_class2.detach().numpy())[0]
-print(y_inferB)
 
+# print(y_inferB)
+# print(f"The probability that Golden Sate will win at home is {y_inferB.detach().numpy()[0][1]*100.0}%")
 
-print(f"The probability that Golden Sate will win at home is {y_inferB.detach().numpy()[0][1]*100.0}%")
+print(y_inferB.detach().numpy()[0][1])
+print(y_infer.detach().numpy()[0][1])

@@ -55,4 +55,4 @@ def train(model, X_train, y_train, num_epochs, optimizer, loss_fn):
         if epoch % 10 == 0:
             predictions = y_pred.max(dim=1)[1]
             accuracy = accuracy_fn(y_pred=predictions, y_true=y_train)
-            print(f"Epoch: {epoch} | loss: {loss:.2f}, accuracy: {accuracy:.1f}")
+            # print(f"Epoch: {epoch} | loss: {loss:.2f}, accuracy: {accuracy:.1f}")
