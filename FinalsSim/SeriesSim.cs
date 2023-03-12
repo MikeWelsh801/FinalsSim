@@ -13,11 +13,9 @@ namespace FinalsSim
     /// </summary>
     internal class SeriesSim
     {
-     
         public double AwayProb { get; private set; }
         public double HomeProb { get; private set; }
         
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -84,7 +82,6 @@ namespace FinalsSim
                     awayWins++;
                 else homeWins++;
             }
-
         }
     }
 }
