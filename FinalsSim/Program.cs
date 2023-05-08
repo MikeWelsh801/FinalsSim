@@ -16,7 +16,7 @@ Console.WriteLine();
 
 // 2022 finals probabilities: Home, Away
 
-(args.Length != 2)
+if (args.Length != 2)
     throw new ArgumentException("Incorrect number of arguments.");
 
 // Predicted probability of team with homecourt advantage winning a home game. 
