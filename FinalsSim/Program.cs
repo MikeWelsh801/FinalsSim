@@ -14,6 +14,7 @@ Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (intro.Leng
 Console.WriteLine();
 Console.WriteLine();
 
+
 // 2022 finals probabilities: Home, Away
 
 if (args.Length != 2)
