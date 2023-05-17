@@ -9,7 +9,7 @@ cd $exec_path
 
 echo running sim...
 
-./FinalsSim $train_path"train.txt"
+./FinalsSim $train_path"$1"
 
 echo leaving $exec_path
 cd $train_path
