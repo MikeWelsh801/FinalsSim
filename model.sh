@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Runs the sim with the trained output probabilities.
 train_path=../../../../
 exec_path=./FinalsSim/bin/Debug/net6.0
@@ -7,7 +9,7 @@ cd $exec_path
 
 echo running sim...
 
-./FinalsSim $(cat $train_path/train.txt)
+./FinalsSim $train_path"train.txt"
 
 echo leaving $exec_path
 cd $train_path

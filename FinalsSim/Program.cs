@@ -3,29 +3,31 @@
 // index zero is how many series simulations resulted in a sweep for the team with
 // home court advantage. 
 using FinalsSim;
+using System.Text;
 
 List<int> result = new() { 0, 0, 0, 0, 0, 0, 0, 0 };
 
-string HomeTeam = "Golden State";
-string AwayTeam = "Boston";
 
 string intro = "Calculating Series Odds...";
 Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (intro.Length / 2)) + "}", intro));
 Console.WriteLine();
 Console.WriteLine();
 
-// 2022 finals probabilities: Home, Away
+// Get the probabilities and home/away teams from training file
+if (args.Length != 1)
+    throw new ArgumentException("Incrorect number of arguemnts");
 
-if (args.Length != 2)
-    throw new ArgumentException("Incorrect number of arguments.");
+string[] pars = File.ReadAllLines(args[0]);
 
 // Predicted probability of team with homecourt advantage winning a home game. 
 // (derived from neural net and rounded)
-double HomePercentage = Double.Parse(args[0]);
+string HomeTeam = pars[0];
+double HomePercentage = Double.Parse(pars[1]);
 
 // Predicted probability of team without homecourt advantage winning a home game. 
 // (derived from neural net and rounded)
-double AwayPercentage = Double.Parse(args[1]);
+string AwayTeam = pars[2];
+double AwayPercentage = Double.Parse(pars[3]);
 
 SeriesSim sim = new(AwayPercentage, HomePercentage);
 int runs = 10_000_000;
@@ -48,7 +50,7 @@ for (int i = 0; i < result.Count; i++)
     string winner = (i < 4) ? HomeTeam : AwayTeam;
     int games = (i < 4) ? i + 4 : i;
     check += prob;
-    Console.WriteLine($"\tThere is a {prob * 100:F1} percent chance of {winner} winning the series in {games} games.");
+    Console.WriteLine($"\tThere is a(n) {prob * 100:F1} percent chance of the {winner} winning the series in {games} games.");
     Console.WriteLine();
 
     if(i < 4)
@@ -66,6 +68,7 @@ Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (outro1.Len
 Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (outro2.Length / 2)) + "}", outro2));
 
 Console.WriteLine();
-Console.WriteLine($"\t{HomeTeam} has a {homeTeamProb * 100:F1} percent chance of winning the series.");
+Console.WriteLine($"\tThe {HomeTeam} have a(n) {homeTeamProb * 100:F1} percent chance of winning the series.");
 Console.WriteLine();
-Console.WriteLine($"\t{AwayTeam} has a {awayTeamProb * 100:F1} percent chance of winning the series.");
+Console.WriteLine($"\tThe {AwayTeam} have a(n) {awayTeamProb * 100:F1} percent chance of winning the series.");
+Console.WriteLine();

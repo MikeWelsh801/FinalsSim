@@ -18,11 +18,15 @@ import sys
 # Set seed, so we get same data every time
 SEED = 1234
 LEARNING_RATE = 1e-2
+HOME_TEAM = sys.argv[1]
+AWAY_TEAM = sys.argv[2]
+YEAR = sys.argv[3]
+PATH = "./NN Stuff/"
 np.random.seed(SEED)
 random.seed(SEED)
 
 # call loading function and plot
-df, X, y = Load.load_from_file("./NN Stuff/NBA_Training_Data.csv")
+df, X, y = Load.load_from_file(f"{PATH}NBA_Training_Data_{YEAR}.csv")
 # Load.plot(X, y, "Games by Fg%")
 
 # split up the data into training, test, validation sets
@@ -154,9 +158,9 @@ y_pred = y_prob.max(dim=1)[1]
 performance = Eval.get_metrics(y_true=y_test, y_pred=y_pred, classes=classes)
 # print(json.dumps(performance, indent=2))
 
-# Inputs for inference
+# Inputs for inference ***AWAY_TEAM***
 predDF, X_infer, y_null = Load.load_from_file(
-    "./NN Stuff/BOSTON_FINALS.csv")
+    f"{PATH}{AWAY_TEAM}_at_home_prediction_{YEAR}.csv")
 
 # Standardize
 X_infer -= means
@@ -172,9 +176,10 @@ label = label_encoder.inverse_transform(_class.detach().numpy())[0]
 
 # print(f"The probability that Boston will win at home is {y_infer.detach().numpy()[0][1]*100.0}%")
 
-# Inputs for inference
+# Inputs for inference ***HOME_TEAM***
 predDF2, X_inferB, y_null2 = Load.load_from_file(
-    "./NN Stuff/2022_NBA_FINALS_DATA.csv")
+    f"{PATH}{HOME_TEAM}_at_home_prediction_{YEAR}.csv")
+
 
 # Standardize
 X_inferB -= means
@@ -189,5 +194,7 @@ label2 = label_encoder.inverse_transform(_class2.detach().numpy())[0]
 # print(y_inferB)
 # print(f"The probability that Golden Sate will win at home is {y_inferB.detach().numpy()[0][1]*100.0}%")
 
+print(HOME_TEAM.strip())
 print(y_inferB.detach().numpy()[0][1])
+print(AWAY_TEAM.strip())
 print(y_infer.detach().numpy()[0][1])

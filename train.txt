@@ -1,2 +1,4 @@
-0.7258326
-0.04704879
+Denver Nuggets
+0.48290706
+Los Angeles Lakers
+0.9056648

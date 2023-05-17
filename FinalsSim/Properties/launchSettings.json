@@ -2,7 +2,11 @@
   "profiles": {
     "FinalsSim": {
       "commandName": "Project",
-      "commandLineArgs": "0.54 0.52"
+      "commandLineArgs": "DenverNuggets\r\n0.48290706\r\nLosAngelesLakers\r\n0.9056648"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
     }
   }
 }
