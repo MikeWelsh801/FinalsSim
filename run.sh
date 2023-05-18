@@ -6,9 +6,9 @@ HOME_PREDICT="$NN_FOLDER""$1"_at_home_prediction_"$3".csv
 AWAY_PREDICT="$NN_FOLDER""$2"_at_home_prediction_"$3".csv
 TRAIN_PROBS_FILE="$NN_FOLDER"train_"$1"_"$2"_"$3".txt
 
+# look for and generate training data
 echo "Looking for $TRAIN_DATA_FILE ..."
 
-# look for and generate training data
 if [ ! -f "$TRAIN_DATA_FILE" ]; then
     echo "Training data file not yet generated for $3."
     echo "Creating data..."
