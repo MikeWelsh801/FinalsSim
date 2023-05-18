@@ -3,7 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 # ignore auto generated training data
-NN\ Stuff/*
+./NN\ Stuff/*
 
 # User-specific files
 *.rsuser
