@@ -7,7 +7,6 @@ using System.Text;
 
 List<int> result = new() { 0, 0, 0, 0, 0, 0, 0, 0 };
 
-
 string intro = "Calculating Series Odds...";
 Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (intro.Length / 2)) + "}", intro));
 Console.WriteLine();
@@ -62,10 +61,14 @@ homeTeamProb /= runs;
 awayTeamProb /= runs;
 
 Console.WriteLine();
+
+Console.ForegroundColor = ConsoleColor.Green;
 string outro1 = "****************** Final Odds ******************";
 string outro2 = "************************************************";
+
 Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (outro1.Length / 2)) + "}", outro1));
 Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (outro2.Length / 2)) + "}", outro2));
+Console.ResetColor();
 
 Console.WriteLine();
 Console.WriteLine($"\tThe {HomeTeam} have a(n) {homeTeamProb * 100:F1} percent chance of winning the series.");
