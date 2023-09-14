@@ -3,7 +3,6 @@
 // index zero is how many series simulations resulted in a sweep for the team with
 // home court advantage. 
 using FinalsSim;
-using System.Text;
 
 List<int> result = new() { 0, 0, 0, 0, 0, 0, 0, 0 };
 
