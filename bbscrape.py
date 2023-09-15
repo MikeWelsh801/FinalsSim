@@ -136,8 +136,9 @@ def parse_game_logs():
 
 
 def main():
-    """Start of the program. This will get the correct webpage and parse
-    everything given the NBA year as a command line argument."""
+    """Start of the program. This will get the correct webpage from
+    bb_reference and parse everything given the NBA year as a command line
+    argument."""
     parser = argparse.ArgumentParser()
 
     # add -p flag to generate predict csv
